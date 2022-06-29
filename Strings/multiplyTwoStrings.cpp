@@ -1,0 +1,97 @@
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+ 
+
+ // } Driver Code Ends
+class Solution{
+  public:
+    /*You are required to complete below function */
+    
+// Function for finding sum of larger numbers
+string findSum(string str1, string str2)
+{
+    // Before proceeding further, make sure length
+    // of str2 is larger.
+    if (str1.length() > str2.length())
+        swap(str1, str2);
+ 
+    // Take an empty string for storing result
+    string str = "";
+ 
+    // Calculate length of both string
+    int n1 = str1.length(), n2 = str2.length();
+ 
+    // Reverse both of strings
+    reverse(str1.begin(), str1.end());
+    reverse(str2.begin(), str2.end());
+ 
+    int carry = 0;
+    for (int i=0; i<n1; i++)
+    {
+        // Do school mathematics, compute sum of
+        // current digits and carry
+        int sum = ((str1[i]-'0')+(str2[i]-'0')+carry);
+        str.push_back(sum%10 + '0');
+ 
+        // Calculate carry for next step
+        carry = sum/10;
+    }
+ 
+    // Add remaining digits of larger number
+    for (int i=n1; i<n2; i++)
+    {
+        int sum = ((str2[i]-'0')+carry);
+        str.push_back(sum%10 + '0');
+        carry = sum/10;
+    }
+ 
+    // Add remaining carry
+    if (carry)
+        str.push_back(carry+'0');
+ 
+    // reverse resultant string
+    reverse(str.begin(), str.end());
+ 
+    return str;
+}
+
+    string multiplyStrings(string s1, string s2) {
+       //Your code 
+       int a=s1.length();
+       int b=s2.length();
+       string res="0";
+       if(s1=="0" || s2=="0"){
+           return "0";
+       }
+       for(int i=0;i<b;i++){
+           int carry=0;
+           string t;
+           for(int j=0;j<a;j++){
+               int x=(((int)(s1[j])*(int)(s2[i]))+carry)%10;
+               string y=std::to_string((x));
+               t=y+t;
+               carry=((s1[i]*s2[j])+carry/10);
+
+           }
+           res=findSum(res,t);
+       }
+       return res;
+    }
+
+};
+
+// { Driver Code Starts.
+ 
+int main() {
+     
+   
+    
+    	string a="33";
+    	string b="2";
+    	
+    	Solution obj;
+    	cout<<obj.multiplyStrings(a,b)<<endl;
+    
+     
+}  // } Driver Code Ends

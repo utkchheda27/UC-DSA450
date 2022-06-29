@@ -1,0 +1,72 @@
+// Given a string S consisting of uppercase and lowercase characters.
+// The task is to sort uppercase and lowercase letters separately 
+// such that if the ith place in the original string had an
+// Uppercase character then it should not have a lowercase character 
+// after being sorted and vice versa.
+
+// Example 1:
+
+// Input:
+// N = 12
+// S = defRTSersUXI
+// Output: deeIRSfrsTUX
+// Explanation: Sorted form of given string
+// with the same case of character as that
+// in original string is deeIRSfrsTUX
+
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+
+
+class Solution
+{
+    public:
+    //Function to perform case-specific sorting of strings.
+    string caseSort(string str, int n)
+    {
+        // your code here
+        string x=str;
+        sort(x.begin(),x.end());
+        string:: iterator it1=x.begin();
+        string:: iterator it2=x.begin();
+        for(int i=0;i<n;i++){
+            if(x[i]>96){
+                break;
+            }
+            it2++;
+        }
+        
+        for(auto it=str.begin();it!=str.end();it++){
+            char temp=*it;
+            if(temp>96){
+                *it=*it2;
+                it2++;
+            }else{
+                *it=*it1;
+                it1++;
+            }
+        }
+        return str;
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{
+	int t;
+	cin>>t;
+	while(t--)
+	{
+		int n;
+		cin>>n;
+		string str;
+		cin>>str;
+		Solution obj;
+		cout<<obj.caseSort (str, n)<<endl;
+	}
+}  // } Driver Code Ends
